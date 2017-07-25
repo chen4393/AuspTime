@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AuspTime"
+             x:Class="AuspTime.MainPage">
+    <StackLayout Spacing="0" x:Name="layout">
+        <Label Text="3:58PM 07/24/2017" HorizontalTextAlignment="Center" FontSize="36" BackgroundColor="Aqua" />
+
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <Label Text="Today" TextColor="White" BackgroundColor="Black" FontSize="Large" HorizontalTextAlignment="Center" />
+                <Label Text="AMRIT 05:50 AM" BackgroundColor="LightBlue" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="KAAL 07:42 AM" BackgroundColor="LightPink" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="SHUBH 09:34 AM" BackgroundColor="Blue" FontSize="Large"
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="ROG 09:34 AM" BackgroundColor="Coral" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="UDWEG 01:34 PM" BackgroundColor="Red" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="CHAL 03:11 PM" BackgroundColor="White" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="LABH 05:03 PM" BackgroundColor="Aqua" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="AMRIT 07:03 PM" BackgroundColor="LightBlue" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                <BoxView Color="Wheat" />
+
+                <Label Text="Last Night" TextColor="White" BackgroundColor="Black" FontSize="Large" HorizontalTextAlignment="Center" />
+                <Label Text="AMRIT 05:50 AM" BackgroundColor="LightBlue" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="KAAL 07:42 AM" BackgroundColor="LightPink" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="SHUBH 09:34 AM" BackgroundColor="Blue" FontSize="Large"
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="ROG 09:34 AM" BackgroundColor="Coral" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="UDWEG 01:34 PM" BackgroundColor="Red" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="CHAL 03:11 PM" BackgroundColor="White" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="LABH 05:03 PM" BackgroundColor="Aqua" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="AMRIT 07:03 PM" BackgroundColor="LightBlue" FontSize="Large" 
+               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+            </StackLayout>
+        </ScrollView>
+
+        <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                <Button x:Name="configButton" Text="Configuration" BackgroundColor="Aquamarine" 
+                        WidthRequest="50" HeightRequest="40" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                <Button x:Name="aboutButton" Text="About" BackgroundColor="Aquamarine" 
+                        WidthRequest="50" HeightRequest="40" />
+            </StackLayout>
+        </StackLayout>
+        
+    </StackLayout>
+</ContentPage>
