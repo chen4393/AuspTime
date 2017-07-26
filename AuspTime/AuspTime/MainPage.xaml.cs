@@ -24,6 +24,8 @@ namespace AuspTime
                     break;
             }
             this.Padding = new Thickness(0, padding, 0, 0);
+
+            
         }
     }
 }

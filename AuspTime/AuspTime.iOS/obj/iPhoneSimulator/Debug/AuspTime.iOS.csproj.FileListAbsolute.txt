@@ -70,4 +70,4 @@ c:\users\ccr13\onedrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\
 c:\users\ccr13\onedrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\AuspTime.iOS.csprojResolveAssemblyReference.cache
 c:\users\ccr13\onedrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\AuspTime.iOS.exe
 c:\users\ccr13\onedrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\AuspTime.iOS.pdb
-c:\users\ccr13\onedrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime.iOS\bin\iPhoneSimulator\Debug\AuspTime.dll.mdb
+C:\Users\ccr13\OneDrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime.iOS\bin\iPhoneSimulator\Debug\AuspTime.dll.mdb

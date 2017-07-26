@@ -16,35 +16,75 @@
                 <Label Text="SHUBH 09:34 AM" BackgroundColor="Blue" FontSize="Large"
                        HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="ROG 09:34 AM" BackgroundColor="Coral" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="UDWEG 01:34 PM" BackgroundColor="Red" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="CHAL 03:11 PM" BackgroundColor="White" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="LABH 05:03 PM" BackgroundColor="Aqua" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="AMRIT 07:03 PM" BackgroundColor="LightBlue" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
 
                 <BoxView Color="Wheat" />
 
                 <Label Text="Last Night" TextColor="White" BackgroundColor="Black" FontSize="Large" HorizontalTextAlignment="Center" />
                 <Label Text="AMRIT 05:50 AM" BackgroundColor="LightBlue" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="KAAL 07:42 AM" BackgroundColor="LightPink" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="SHUBH 09:34 AM" BackgroundColor="Blue" FontSize="Large"
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="ROG 09:34 AM" BackgroundColor="Coral" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="UDWEG 01:34 PM" BackgroundColor="Red" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="CHAL 03:11 PM" BackgroundColor="White" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="LABH 05:03 PM" BackgroundColor="Aqua" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
                 <Label Text="AMRIT 07:03 PM" BackgroundColor="LightBlue" FontSize="Large" 
-               HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                <BoxView Color="Wheat" />
+
+                <Label Text="Tonight" TextColor="White" BackgroundColor="Black" FontSize="Large" HorizontalTextAlignment="Center" />
+                <Label Text="AMRIT 05:50 AM" BackgroundColor="LightBlue" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="KAAL 07:42 AM" BackgroundColor="LightPink" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="SHUBH 09:34 AM" BackgroundColor="Blue" FontSize="Large"
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="ROG 09:34 AM" BackgroundColor="Coral" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="UDWEG 01:34 PM" BackgroundColor="Red" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="CHAL 03:11 PM" BackgroundColor="White" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="LABH 05:03 PM" BackgroundColor="Aqua" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="AMRIT 07:03 PM" BackgroundColor="LightBlue" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+                <BoxView Color="Wheat" />
+
+                <Label Text="Tomorrow" TextColor="White" BackgroundColor="Black" FontSize="Large" HorizontalTextAlignment="Center" />
+                <Label Text="AMRIT 05:50 AM" BackgroundColor="LightBlue" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="KAAL 07:42 AM" BackgroundColor="LightPink" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="SHUBH 09:34 AM" BackgroundColor="Blue" FontSize="Large"
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="ROG 09:34 AM" BackgroundColor="Coral" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="UDWEG 01:34 PM" BackgroundColor="Red" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="CHAL 03:11 PM" BackgroundColor="White" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="LABH 05:03 PM" BackgroundColor="Aqua" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Text="AMRIT 07:03 PM" BackgroundColor="LightBlue" FontSize="Large" 
+                       HeightRequest="40" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
             </StackLayout>
         </ScrollView>
 
