@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace AuspTime
 {
     public partial class MainPage : ContentPage
     {
+        private double userLatitude;
+        private double userLongitude;
+        private double userOffset;
+
         private Label[] labelGroup1 = new Label[9];
         private Label[] labelGroup2 = new Label[9];
         private Label[] labelGroup3 = new Label[9];
@@ -19,6 +25,7 @@ namespace AuspTime
         private void Init()
         {
             SetPadding();
+            SetLocation();
             InitPanel();
             CalculateTimeSequence();
             SetSequence();
@@ -37,6 +44,29 @@ namespace AuspTime
                     break;
             }
             this.Padding = new Thickness(0, padding, 0, 0);
+        }
+
+        private async void SetLocation()
+        {
+            try
+            {
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 50;
+                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, false);
+                if (position != null)
+                {
+                    userLatitude = position.Latitude;
+                    userLatitude = Math.Round(userLatitude * 100000.00) / 100000.00;
+                    userLongitude = position.Longitude;
+                    userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
+                }
+                Debug.WriteLine("userLatitude: " + userLatitude);
+                Debug.WriteLine("userLongitude: " + userLongitude);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception Caught: " + e.ToString());
+            }
         }
 
         private void InitPanel()
@@ -94,7 +124,7 @@ namespace AuspTime
 
         private void CalculateTimeSequence()
         {
-
+            
         }
 
         private void SetSequence()
