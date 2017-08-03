@@ -16,6 +16,11 @@ namespace AuspTime
         private Label[] labelGroup3 = new Label[9];
         private Label[] labelGroup4 = new Label[9];
 
+        private int[] lastnightTime = new int[8];
+        private int[] todayTime = new int[8];
+        private int[] tonightTime = new int[8];
+        private int[] tomorrowTime = new int[8];
+
         public MainPage()
         {
             InitializeComponent();
@@ -60,8 +65,7 @@ namespace AuspTime
                     userLongitude = position.Longitude;
                     userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
                 }
-                Debug.WriteLine("userLatitude: " + userLatitude);
-                Debug.WriteLine("userLongitude: " + userLongitude);
+                userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
             }
             catch (Exception e)
             {
@@ -124,7 +128,30 @@ namespace AuspTime
 
         private void CalculateTimeSequence()
         {
-            
+            SunTime sunTime = new SunTime(userLatitude, userLongitude, userOffset, DateTime.Now);
+            int sunriseTimeTodayDefault = sunTime.sunriseTime, sunsetTimeTodayDefault = sunTime.sunsetTime;
+            int flagrise = sunTime.flagrise, flagset = sunTime.flagset;
+
+            DateTime yesterday = DateTime.Now.AddDays(-1);
+            sunTime = new SunTime(userLatitude, userLongitude, userOffset, yesterday);
+            int sunriseTimeYesterdayDefault = sunTime.sunriseTime, sunsetTimeYesterdayDefault = sunTime.sunsetTime;
+
+            DateTime tomorrow = DateTime.Now.AddDays(1);
+            sunTime = new SunTime(userLatitude, userLongitude, userOffset, tomorrow);
+            int sunriseTimeTomorrowDefault = sunTime.sunriseTime, sunsetTimeTomorrowDefault = sunTime.sunsetTime;
+
+            int temp1 = (86400 - sunsetTimeYesterdayDefault + sunriseTimeTodayDefault) / 8; // last night
+            int temp2 = (sunsetTimeTodayDefault - sunriseTimeTodayDefault) / 8; // today
+            int temp3 = (86400 - sunsetTimeTodayDefault + sunriseTimeTomorrowDefault) / 8; // tonight
+            int temp4 = (sunsetTimeTomorrowDefault - sunriseTimeTomorrowDefault) / 8; // tomorrow
+
+            for (int i = 0; i < 8; i++)
+            {
+                lastnightTime[i] = sunsetTimeYesterdayDefault + temp1 * i;
+                todayTime[i] = sunriseTimeTodayDefault + temp2 * i;
+                tonightTime[i] = sunsetTimeYesterdayDefault + temp3 * i;
+                tomorrowTime[i] = sunriseTimeTomorrowDefault + temp4 * i;
+            }
         }
 
         private void SetSequence()
