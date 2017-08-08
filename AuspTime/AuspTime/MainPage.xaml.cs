@@ -1,5 +1,4 @@
-﻿using Plugin.Geolocator;
-using System;
+﻿using System;
 using System.Diagnostics;
 using Xamarin.Forms;
 
@@ -7,9 +6,9 @@ namespace AuspTime
 {
     public partial class MainPage : ContentPage
     {
-        private double userLatitude;
-        private double userLongitude;
-        private double userOffset;
+        private double userLatitude = 44.83661;
+        private double userLongitude = -93.30022;
+        private double userOffset = -5.00;
 
         private Label[] labelGroup1 = new Label[9];
         private Label[] labelGroup2 = new Label[9];
@@ -51,26 +50,14 @@ namespace AuspTime
             this.Padding = new Thickness(0, padding, 0, 0);
         }
 
-        private async void SetLocation()
+        private void SetLocation()
         {
-            try
-            {
-                var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 50;
-                var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10), null, false);
-                if (position != null)
-                {
-                    userLatitude = position.Latitude;
-                    userLatitude = Math.Round(userLatitude * 100000.00) / 100000.00;
-                    userLongitude = position.Longitude;
-                    userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
-                }
-                userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception Caught: " + e.ToString());
-            }
+            userLatitude = 44.83661;
+            userLongitude = -93.30022;
+            userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
+            Debug.WriteLine("userLatitude = " + userLatitude);
+            Debug.WriteLine("userLongitude = " + userLongitude);
+            Debug.WriteLine("userOffset = " + userOffset);
         }
 
         private void InitPanel()
@@ -132,6 +119,9 @@ namespace AuspTime
             int sunriseTimeTodayDefault = sunTime.sunriseTime, sunsetTimeTodayDefault = sunTime.sunsetTime;
             int flagrise = sunTime.flagrise, flagset = sunTime.flagset;
 
+            
+            Debug.WriteLine("DateTime.Now = " + DateTime.Now);
+
             DateTime yesterday = DateTime.Now.AddDays(-1);
             sunTime = new SunTime(userLatitude, userLongitude, userOffset, yesterday);
             int sunriseTimeYesterdayDefault = sunTime.sunriseTime, sunsetTimeYesterdayDefault = sunTime.sunsetTime;
@@ -144,19 +134,153 @@ namespace AuspTime
             int temp2 = (sunsetTimeTodayDefault - sunriseTimeTodayDefault) / 8; // today
             int temp3 = (86400 - sunsetTimeTodayDefault + sunriseTimeTomorrowDefault) / 8; // tonight
             int temp4 = (sunsetTimeTomorrowDefault - sunriseTimeTomorrowDefault) / 8; // tomorrow
-
+            Debug.WriteLine("temp1 = " + temp1);
+            
             for (int i = 0; i < 8; i++)
             {
                 lastnightTime[i] = sunsetTimeYesterdayDefault + temp1 * i;
                 todayTime[i] = sunriseTimeTodayDefault + temp2 * i;
-                tonightTime[i] = sunsetTimeYesterdayDefault + temp3 * i;
+                tonightTime[i] = sunsetTimeTodayDefault + temp3 * i;
                 tomorrowTime[i] = sunriseTimeTomorrowDefault + temp4 * i;
             }
         }
 
         private void SetSequence()
         {
-            int dayOfWeek = (int) DateTime.Now.DayOfWeek;
+            int day = (int) DateTime.Now.DayOfWeek;
+            switch (day)
+            {
+                case 0:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.sundayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.sundayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.sundayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.sundayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(0);
+                    break;
+
+                case 1:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.mondayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.mondayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.mondayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.mondayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(1);
+                    break;
+
+                case 2:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.tuesdayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.tuesdayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.tuesdayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.tuesdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(2);
+                    break;
+
+                case 3:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.wednesdayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.wednesdayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.wednesdayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.wednesdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(3);
+                    break;
+
+                case 4:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.thursdayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.thursdayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.thursdayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.thursdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(4);
+                    break;
+
+                case 5:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.fridayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.fridayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.fridayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.fridayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(5);
+                    break;
+
+                case 6:
+                    for (int i = 0; i < 8; i++)
+                    {
+                        labelGroup1[i + 1].Text = IndianCalendar.saturdayLastnight[i] + " " + SplitTime(lastnightTime[i]);
+                        labelGroup2[i + 1].Text = IndianCalendar.saturdayToday[i] + " " + SplitTime(todayTime[i]);
+                        labelGroup3[i + 1].Text = IndianCalendar.saturdayTonight[i] + " " + SplitTime(tonightTime[i]);
+                        labelGroup4[i + 1].Text = IndianCalendar.saturdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
+                    }
+                    PaintColor();
+                    UpdateBackgroundColor(6);
+                    break;
+
+                default:
+                    break;
+            }
+            
+        }
+
+        private string SplitTime(int time)
+        {
+
+            string results = null;
+
+            if (time > 86400)
+            {
+                time = time - 86400;
+            }
+            int hours = (time / 3600);
+            int remainder = (time - 3600 * hours);
+            int mins = remainder / 60;
+
+            if (hours > 12)
+            {
+                results = string.Format("{0:D2}:{1:D2}" + " PM", hours - 12, mins);
+            }
+            else if (hours == 12)
+            {
+                results = string.Format("12:{0:D2}" + " PM", mins);
+            }
+            else if (hours > 0 && hours < 12)
+            {
+                results = string.Format("{0:D2}:{1:D2}" + " AM", hours, mins);
+            }
+            else if (hours == 0)
+            {
+                results = string.Format("12:{0:D2}" + " AM", mins);
+            }
+
+            return results;
+        }
+
+        private void PaintColor()
+        {
+
+        }
+
+        private void UpdateBackgroundColor(int day)
+        {
+
         }
     }
 }

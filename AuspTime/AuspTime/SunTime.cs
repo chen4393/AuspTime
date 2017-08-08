@@ -108,7 +108,7 @@ namespace AuspTime
             UT = UT + utcOffset;
             UT = FixValue(UT, 0, 24);
 
-            return (int)Math.Round(UT * 3600.0);
+            return (int) Math.Round(UT * 3600.0);
         }
 
         private static double Deg2Rad(double angle)
