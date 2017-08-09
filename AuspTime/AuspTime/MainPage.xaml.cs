@@ -52,8 +52,18 @@ namespace AuspTime
 
         private void SetLocation()
         {
-            userLatitude = 44.83661;
-            userLongitude = -93.30022;
+            IGeolocator locator = DependencyService.Get<IGeolocator>();
+            double[] data = locator.GetCurrLatLon();
+            if (data != null)
+            {
+                userLatitude = data[0];
+                userLongitude = data[1];
+            }
+            else
+            {
+                userLatitude = 44.83661;
+                userLongitude = -93.30022;
+            }
             userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
             Debug.WriteLine("userLatitude = " + userLatitude);
             Debug.WriteLine("userLongitude = " + userLongitude);
