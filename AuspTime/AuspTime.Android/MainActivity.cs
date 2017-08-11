@@ -33,7 +33,6 @@ namespace AuspTime.Droid
                 locationManager.RequestLocationUpdates(LocationManager.GpsProvider, 0, 0, locationListener);
                 location = locationManager.GetLastKnownLocation(LocationManager.GpsProvider);
             }
-            
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -42,7 +41,6 @@ namespace AuspTime.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
-            
         }
     }
 }

@@ -12,7 +12,6 @@ using Android.Widget;
 
 using Xamarin.Forms;
 using AuspTime.Droid;
-using Android.Locations;
 using Java.Lang;
 
 [assembly: Dependency(typeof(Geolocator))]

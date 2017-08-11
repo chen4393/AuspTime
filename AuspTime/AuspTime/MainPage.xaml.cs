@@ -61,7 +61,7 @@ namespace AuspTime
             }
             else
             {
-                userLatitude = 44.83661;
+                userLatitude = 24.83661;
                 userLongitude = -93.30022;
             }
             userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
