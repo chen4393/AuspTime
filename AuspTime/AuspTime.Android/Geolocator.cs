@@ -13,27 +13,72 @@ using Android.Widget;
 using Xamarin.Forms;
 using AuspTime.Droid;
 using Java.Lang;
+using Android.Locations;
 
 [assembly: Dependency(typeof(Geolocator))]
 namespace AuspTime.Droid
 {
-    public class Geolocator : IGeolocator
+    public class LocationEventArgs : EventArgs, ILocationEventArgs
     {
-        public Geolocator()
+        public double lat { get; set; }
+        public double lng { get; set; }
+    }
+
+    public class Geolocator : Java.Lang.Object, IGeolocator, ILocationListener
+    {
+        LocationManager lm;
+
+        public event EventHandler<ILocationEventArgs> locationObtained;
+
+        event EventHandler<ILocationEventArgs> IGeolocator.locationObtained
+        {
+            add
+            {
+                locationObtained += value;
+            }
+            remove
+            {
+                locationObtained -= value;
+            }
+        }
+
+        public void ObtainMyLocation()
+        {
+            lm = (LocationManager)Forms.Context.GetSystemService(Context.LocationService);
+            lm.RequestLocationUpdates(LocationManager.GpsProvider, 0, 0, this);
+            Location location = lm.GetLastKnownLocation(LocationManager.GpsProvider);
+            OnLocationChanged(location);
+        }
+
+        ~Geolocator()
+        {
+            lm.RemoveUpdates(this);
+        }
+
+        public void OnLocationChanged(Location location)
+        {
+            if (location != null)
+            {
+                LocationEventArgs args = new LocationEventArgs();
+                args.lat = location.Latitude;
+                args.lng = location.Longitude;
+                locationObtained(this, args);
+            }
+        }
+
+        public void OnProviderDisabled(string provider)
         {
 
         }
 
-        public double[] GetCurrLatLon()
+        public void OnProviderEnabled(string provider)
         {
-            double[] data = new double[2];
-            if (MainActivity.location != null)
-            {
-                data[0] = MainActivity.location.Latitude;
-                data[1] = MainActivity.location.Longitude;
-                return data;
-            }
-            return null;
+
+        }
+
+        public void OnStatusChanged(string provider, [GeneratedEnum] Availability status, Bundle extras)
+        {
+
         }
     }
 }

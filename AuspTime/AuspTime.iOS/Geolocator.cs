@@ -10,51 +10,60 @@ using System.Diagnostics;
 [assembly: Dependency(typeof(Geolocator))]
 namespace AuspTime.iOS
 {
+    public class LocationEventArgs : EventArgs, ILocationEventArgs
+    {
+        public double lat { get; set; }
+        public double lng { get; set; }
+    }
+
     public class Geolocator : IGeolocator
     {
-        double[] data;
+        CLLocationManager lm;
 
-        CLLocationManager locationManager;
+        public event EventHandler<ILocationEventArgs> locationObtained;
 
-        public Geolocator()
+        event EventHandler<ILocationEventArgs> IGeolocator.locationObtained
         {
-            locationManager = new CLLocationManager();
-            locationManager.DesiredAccuracy = 100;
-
-            data = new double[2];
-            if (UIDevice.CurrentDevice.CheckSystemVersion(6, 0))
+            add
             {
-                locationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) =>
-                {
-                    CLLocation location = e.Locations[e.Locations.Length - 1];
-                    if (location != null)
-                    {
-                        data[0] = location.Coordinate.Latitude;
-                        data[1] = location.Coordinate.Longitude;
-                    }
-                };
+                locationObtained += value;
             }
-
-            locationManager.AuthorizationChanged += (sender, e) =>
+            remove
             {
-                Debug.WriteLine("e.Status = " + e.Status + ", AuthorizedWhenInUse = " + CLAuthorizationStatus.AuthorizedWhenInUse);
-                if (e.Status == CLAuthorizationStatus.AuthorizedWhenInUse)
-                {
-                    locationManager.StartUpdatingLocation();
-                }
-            };
-
-            locationManager.RequestWhenInUseAuthorization();
+                locationObtained -= value;
+            }
         }
 
-        public double[] GetCurrLatLon()
+        public void ObtainMyLocation()
         {
-            
-            if (data[0] == 0)
+            lm = new CLLocationManager();
+            lm.DesiredAccuracy = CLLocation.AccuracyBest;
+            lm.DistanceFilter = CLLocationDistance.FilterNone;
+
+            lm.LocationsUpdated += (sender, e) =>
             {
-                return null;
-            }
-            return data;
+                var locations = e.Locations;
+                var strLocation = locations[locations.Length - 1].Coordinate.Latitude.ToString();
+                strLocation = strLocation + "," + locations[locations.Length - 1].Coordinate.Longitude.ToString();
+                LocationEventArgs args = new LocationEventArgs();
+                args.lat = locations[locations.Length - 1].Coordinate.Latitude;
+                args.lng = locations[locations.Length - 1].Coordinate.Longitude;
+                locationObtained(this, args);
+            };
+            lm.AuthorizationChanged += (sender, e) =>
+            {
+                //Debug.WriteLine("e.Status = " + e.Status + ", AuthorizedWhenInUse = " + CLAuthorizationStatus.AuthorizedWhenInUse);
+                if (e.Status == CLAuthorizationStatus.AuthorizedWhenInUse)
+                {
+                    lm.StartUpdatingLocation();
+                }
+            };
+            lm.RequestWhenInUseAuthorization();
+        }
+
+        ~Geolocator()
+        {
+            lm.StopUpdatingLocation();
         }
     }
 }
