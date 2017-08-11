@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace AuspTime
@@ -165,7 +166,6 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.sundayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(0);
                     break;
 
                 case 1:
@@ -177,7 +177,6 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.mondayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(1);
                     break;
 
                 case 2:
@@ -189,7 +188,6 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.tuesdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(2);
                     break;
 
                 case 3:
@@ -201,7 +199,6 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.wednesdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(3);
                     break;
 
                 case 4:
@@ -213,7 +210,6 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.thursdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(4);
                     break;
 
                 case 5:
@@ -225,7 +221,6 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.fridayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(5);
                     break;
 
                 case 6:
@@ -237,13 +232,12 @@ namespace AuspTime
                         labelGroup4[i + 1].Text = IndianCalendar.saturdayTomorrow[i] + " " + SplitTime(tomorrowTime[i]);
                     }
                     PaintColor();
-                    UpdateBackgroundColor(6);
                     break;
 
                 default:
                     break;
             }
-            
+            UpdateClockBackgroundColor();
         }
 
         private string SplitTime(int time)
@@ -281,12 +275,122 @@ namespace AuspTime
 
         private void PaintColor()
         {
+            for (int i = 1; i < 9; i++)
+            {
+                if (new Regex("AMRIT.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.FromRgba(175, 230, 255, 255); }
+                else if (new Regex("LABH.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.FromRgba(120, 200, 200, 255); }
+                else if (new Regex("SHUBH.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.FromRgba(0, 165, 190, 255); }
+                else if (new Regex("CHAL.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.White; }
+                else if (new Regex("KAAL.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.FromRgba(255, 190, 190, 255); }
+                else if (new Regex("ROG.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.FromRgba(255, 128, 128, 255); }
+                else if (new Regex("UDWEG.*").IsMatch(labelGroup1[i].Text.ToString())) { labelGroup1[i].BackgroundColor = Color.FromRgba(255, 0, 0, 255); }
+                else { labelGroup1[i].BackgroundColor = Color.Black; }
+            }
 
+            for (int i = 1; i < 9; i++)
+            {
+                if (new Regex("AMRIT.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.FromRgba(175, 230, 255, 255); }
+                else if (new Regex("LABH.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.FromRgba(120, 200, 200, 255); }
+                else if (new Regex("SHUBH.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.FromRgba(0, 165, 190, 255); }
+                else if (new Regex("CHAL.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.White; }
+                else if (new Regex("KAAL.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.FromRgba(255, 190, 190, 255); }
+                else if (new Regex("ROG.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.FromRgba(255, 128, 128, 255); }
+                else if (new Regex("UDWEG.*").IsMatch(labelGroup2[i].Text.ToString())) { labelGroup2[i].BackgroundColor = Color.FromRgba(255, 0, 0, 255); }
+                else { labelGroup2[i].BackgroundColor = Color.Black; }
+            }
+
+            for (int i = 1; i < 9; i++)
+            {
+                if (new Regex("AMRIT.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.FromRgba(175, 230, 255, 255); }
+                else if (new Regex("LABH.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.FromRgba(120, 200, 200, 255); }
+                else if (new Regex("SHUBH.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.FromRgba(0, 165, 190, 255); }
+                else if (new Regex("CHAL.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.White; }
+                else if (new Regex("KAAL.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.FromRgba(255, 190, 190, 255); }
+                else if (new Regex("ROG.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.FromRgba(255, 128, 128, 255); }
+                else if (new Regex("UDWEG.*").IsMatch(labelGroup3[i].Text.ToString())) { labelGroup3[i].BackgroundColor = Color.FromRgba(255, 0, 0, 255); }
+                else { labelGroup3[i].BackgroundColor = Color.Black; }
+            }
+
+            for (int i = 1; i < 9; i++)
+            {
+                if (new Regex("AMRIT.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.FromRgba(175, 230, 255, 255); }
+                else if (new Regex("LABH.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.FromRgba(120, 200, 200, 255); }
+                else if (new Regex("SHUBH.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.FromRgba(0, 165, 190, 255); }
+                else if (new Regex("CHAL.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.White; }
+                else if (new Regex("KAAL.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.FromRgba(255, 190, 190, 255); }
+                else if (new Regex("ROG.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.FromRgba(255, 128, 128, 255); }
+                else if (new Regex("UDWEG.*").IsMatch(labelGroup4[i].Text.ToString())) { labelGroup4[i].BackgroundColor = Color.FromRgba(255, 0, 0, 255); }
+                else { labelGroup4[i].BackgroundColor = Color.Black; }
+            }
         }
 
-        private void UpdateBackgroundColor(int day)
+        private void UpdateClockBackgroundColor()
         {
+            DateTime calendar = DateTime.Now;
+            int hour = calendar.Hour;
+            int minute = calendar.Minute;
+            int second = calendar.Second;
+            int temp = hour * 3600 + minute * 60 + second;
 
+            if (temp < todayTime[0])
+            {
+                temp += 86400;
+                FillTitleBackgroundColor(temp, lastnightTime, labelGroup1);
+            }
+            else if (temp >= todayTime[0] && temp < tonightTime[0])
+            {
+                FillTitleBackgroundColor(temp, todayTime, labelGroup2);
+            }
+            else
+            {
+                FillTitleBackgroundColor(temp, tonightTime, labelGroup3);
+            }
+        }
+
+        private void FillTitleBackgroundColor(int temp, int[] time, Label[] group)
+        {
+            int index = 0;
+            if (temp >= time[0] - 20 && temp < time[1] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[1].BackgroundColor;
+                index = 1;
+            }
+            if (temp >= time[1] - 20 && temp < time[2] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[2].BackgroundColor;
+                index = 2;
+            }
+            if (temp >= time[2] - 20 && temp < time[3] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[3].BackgroundColor;
+                index = 3;
+            }
+            if (temp >= time[3] - 20 && temp < time[4] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[4].BackgroundColor;
+                index = 4;
+            }
+            if (temp >= time[4] - 20 && temp < time[5] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[5].BackgroundColor;
+                index = 5;
+            }
+            if (temp >= time[5] - 20 && temp < time[6] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[6].BackgroundColor;
+                index = 6;
+            }
+            if (temp >= time[6] - 20 && temp < time[7] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[7].BackgroundColor;
+                index = 7;
+            }
+            if (temp >= time[7] - 20 && temp < time[8] - 20)
+            {
+                dateTimeTitle.BackgroundColor = group[8].BackgroundColor;
+                index = 8;
+            }
+            group[index].Text = ("\u261E " + group[index].Text);
         }
     }
 }

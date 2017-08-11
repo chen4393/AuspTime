@@ -70,3 +70,4 @@ C:\Users\ccr13\Desktop\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\
 C:\Users\ccr13\Desktop\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\AuspTime.iOS.csprojResolveAssemblyReference.cache
 C:\Users\ccr13\Desktop\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\AuspTime.iOS.exe
 C:\Users\ccr13\Desktop\AuspTime\AuspTime\AuspTime.iOS\obj\iPhoneSimulator\Debug\AuspTime.iOS.pdb
+C:\Users\ccr13\Desktop\AuspTime\AuspTime\AuspTime.iOS\bin\iPhoneSimulator\Debug\AuspTime.dll.mdb
