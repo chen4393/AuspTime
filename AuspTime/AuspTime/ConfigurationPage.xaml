@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AuspTime.ConfigurationPage">
+             x:Class="AuspTime.ConfigurationPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                     iOS="20, 40, 20, 20"
@@ -9,23 +10,45 @@
     </ContentPage.Padding>
     <ContentPage.Content>
         <StackLayout>
-            
+
             <StackLayout>
-                <Label Text="Welcome to Xamarin Forms!" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Latitude Degree: " />
+                    <Entry Text="44.83674" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Longitude Degree: " />
+                    <Entry Text="-93.30046" />
+                </StackLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+            <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                <DatePicker.MinimumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Jan 1 2000</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MinimumDate>
+                <DatePicker.MaximumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Dec 31 2050</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MaximumDate>
+            </DatePicker>
 
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
                     <Button x:Name="doneButton" Text="Done" BackgroundColor="Aquamarine" 
                             WidthRequest="50" HeightRequest="40" Clicked="OnPreviousPageButtonClicked" />
                 </StackLayout>
-
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
-                    <Button x:Name="aboutButton" Text="About Ace Auspicious Time" BackgroundColor="Aquamarine" 
+                    <Button x:Name="aboutButton" Text="About Ausp Time" BackgroundColor="Aquamarine" 
                             WidthRequest="50" HeightRequest="40" Clicked="OnAboutClicked" />
                 </StackLayout>
-
             </StackLayout>
 
         </StackLayout>
