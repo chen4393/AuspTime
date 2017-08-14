@@ -13,7 +13,7 @@ namespace AuspTime
         {
             InitializeComponent();
 
-            MainPage = new AuspTime.MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

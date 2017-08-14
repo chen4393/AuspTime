@@ -23,6 +23,7 @@ namespace AuspTime
 
         public MainPage()
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             Init();
 
@@ -407,6 +408,11 @@ namespace AuspTime
                 index = 8;
             }
             group[index].Text = ("\u261E " + group[index].Text);
+        }
+
+        async void OnConfigure(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ConfigurationPage());
         }
     }
 }

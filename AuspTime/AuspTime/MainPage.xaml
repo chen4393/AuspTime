@@ -93,7 +93,7 @@
         <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
                 <Button x:Name="configButton" Text="Configuration" BackgroundColor="Aquamarine" 
-                        WidthRequest="50" HeightRequest="40" />
+                        WidthRequest="50" HeightRequest="40" Clicked="OnConfigure" />
             </StackLayout>
             <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
                 <Button x:Name="aboutButton" Text="About" BackgroundColor="Aquamarine" 
