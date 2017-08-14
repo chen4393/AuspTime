@@ -7,9 +7,9 @@ namespace AuspTime
 {
     public partial class MainPage : ContentPage
     {
-        private double userLatitude = 44.83661;
-        private double userLongitude = -93.30022;
-        private double userOffset = -5.00;
+        public static double userLatitude = 44.83661;
+        public static double userLongitude = -93.30022;
+        public static double userOffset = -5.00;
 
         private Label[] labelGroup1 = new Label[9];
         private Label[] labelGroup2 = new Label[9];
@@ -79,9 +79,7 @@ namespace AuspTime
             locator.ObtainMyLocation();
             
             userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
-            Debug.WriteLine("userLatitude = " + userLatitude);
-            Debug.WriteLine("userLongitude = " + userLongitude);
-            Debug.WriteLine("userOffset = " + userOffset);
+            
         }
 
         private void InitPanel()

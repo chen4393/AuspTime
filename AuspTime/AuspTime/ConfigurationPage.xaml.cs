@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,12 @@ namespace AuspTime
 		{
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
+            // Load setting data
+            latitudeEntry.Text = MainPage.userLatitude.ToString();
+            longitudeEntry.Text = MainPage.userLongitude.ToString();
+            offsetEntry.Text = MainPage.userOffset.ToString();
+            CheckDate();
+            CheckLocation();
         }
 
         async void OnPreviousPageButtonClicked(object sender, EventArgs e)
@@ -37,6 +44,44 @@ namespace AuspTime
                 "\u2022 SHUBH: good [Jupiter, good]\n" +
                 "\u2022 UDWEG: regret, fear, distress (separation from a beloved object). [Sun, bad]";
             DisplayAlert("About Ace Auspicious Time", message, "done");
+        }
+
+        private void OnDoneClicked(object sender, EventArgs e)
+        {
+            OnPreviousPageButtonClicked(sender, e);
+        }
+
+        private void OnCurrentLocationClicked(object sender, EventArgs e)
+        {
+            latitudeEntry.Text = MainPage.userLatitude.ToString();
+            longitudeEntry.Text = MainPage.userLongitude.ToString();
+            offsetEntry.Text = MainPage.userOffset.ToString();
+            currentLocationButton.BackgroundColor = Color.Aquamarine;
+        }
+
+        private void OnCurrentDateClicked(object sender, EventArgs e)
+        {
+            datePicker.Date = DateTime.Now;
+            currentDateButton.BackgroundColor = Color.Aquamarine;
+        }
+
+        private void CheckDate()
+        {
+            if (datePicker.Date.DayOfYear != DateTime.Now.DayOfYear)
+            {
+                currentDateButton.BackgroundColor = Color.Red;
+            }
+        }
+
+        private void CheckLocation()
+        {
+            double diffLatitude = Math.Abs(MainPage.userLatitude - Double.Parse(latitudeEntry.Text));
+            double diffLongitude = Math.Abs(MainPage.userLongitude - Double.Parse(longitudeEntry.Text));
+            double diffOffset = Math.Abs(MainPage.userOffset - Double.Parse(offsetEntry.Text));
+            if (diffLatitude > 0.01 || diffLongitude > 0.01 || diffOffset > 0.01)
+            {
+                currentLocationButton.BackgroundColor = Color.Red;
+            }
         }
     }
 }

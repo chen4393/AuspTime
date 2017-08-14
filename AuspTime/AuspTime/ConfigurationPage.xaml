@@ -12,38 +12,53 @@
         <StackLayout>
 
             <StackLayout>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Label Text="Latitude Degree: " />
-                    <Entry Text="44.83674" />
+                    <Entry x:Name="latitudeEntry" Text="44.83674" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Label Text="Longitude Degree: " />
-                    <Entry Text="-93.30046" />
+                    <Entry x:Name="longitudeEntry" Text="-93.30046" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                    <Label Text="Current TimeZone Offset: " />
+                    <Entry x:Name="offsetEntry" Text="-5.00" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                        <Button x:Name="currentLocationButton" Text="Current Location" BackgroundColor="Aquamarine" 
+                            WidthRequest="50" HeightRequest="40" Clicked="OnCurrentLocationClicked" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
+                        <Button x:Name="currentDateButton" Text="Current Date" BackgroundColor="Aquamarine" 
+                            WidthRequest="50" HeightRequest="40" Clicked="OnCurrentDateClicked" />
+                    </StackLayout>
+                </StackLayout>
+
+                <DatePicker x:Name="datePicker" VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
+                    <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                    <DatePicker.MinimumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                            <x:Arguments>
+                                <x:String>Jan 1 2000</x:String>
+                            </x:Arguments>
+                        </sys:DateTime>
+                    </DatePicker.MinimumDate>
+                    <DatePicker.MaximumDate>
+                        <sys:DateTime x:FactoryMethod="Parse">
+                            <x:Arguments>
+                                <x:String>Dec 31 2050</x:String>
+                            </x:Arguments>
+                        </sys:DateTime>
+                    </DatePicker.MaximumDate>
+                </DatePicker>
             </StackLayout>
 
-            <DatePicker VerticalOptions="CenterAndExpand" Date="{x:Static sys:DateTime.Now}">
-                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
-                <DatePicker.MinimumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                        <x:Arguments>
-                            <x:String>Jan 1 2000</x:String>
-                        </x:Arguments>
-                    </sys:DateTime>
-                </DatePicker.MinimumDate>
-                <DatePicker.MaximumDate>
-                    <sys:DateTime x:FactoryMethod="Parse">
-                        <x:Arguments>
-                            <x:String>Dec 31 2050</x:String>
-                        </x:Arguments>
-                    </sys:DateTime>
-                </DatePicker.MaximumDate>
-            </DatePicker>
-
-            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" >
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
                     <Button x:Name="doneButton" Text="Done" BackgroundColor="Aquamarine" 
-                            WidthRequest="50" HeightRequest="40" Clicked="OnPreviousPageButtonClicked" />
+                            WidthRequest="50" HeightRequest="40" Clicked="OnDoneClicked" />
                 </StackLayout>
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand">
                     <Button x:Name="aboutButton" Text="About Ausp Time" BackgroundColor="Aquamarine" 
