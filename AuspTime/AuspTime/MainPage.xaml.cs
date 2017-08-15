@@ -10,6 +10,7 @@ namespace AuspTime
         public static double userLatitude = 44.83661;
         public static double userLongitude = -93.30022;
         public static double userOffset = -5.00;
+        public DateTime userDate = DateTime.Now;
 
         private Label[] labelGroup1 = new Label[9];
         private Label[] labelGroup2 = new Label[9];
@@ -20,6 +21,9 @@ namespace AuspTime
         private int[] todayTime = new int[8];
         private int[] tonightTime = new int[8];
         private int[] tomorrowTime = new int[8];
+
+        private bool isToday = true;
+        private bool isLocationChanged = false;
 
         public MainPage()
         {
@@ -44,11 +48,39 @@ namespace AuspTime
             };
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (Application.Current.Properties.ContainsKey("MyPreferences"))
+            {
+                ReInit();
+            }
+        }
+
         private void Init()
         {
             SetPadding();
             SetLocation();
             InitPanel();
+            CalculateTimeSequence();
+            SetSequence();
+        }
+
+        private void ReInit()
+        {
+            DateLocation dl = Application.Current.Properties["MyPreferences"] as DateLocation;
+            dateTimeTitle.Text = dl.myDate.ToString("yyyy-MMM-dd h:mm tt");
+            if (dl.myDate.DayOfYear != DateTime.Now.DayOfYear)
+            {
+                isToday = false;
+                userDate = dl.myDate;
+                useCurrentOrConfigured.Text = "Using configured date and location";
+            }
+            else
+            {
+                isToday = true;
+            }
+            ResetLocation();
             CalculateTimeSequence();
             SetSequence();
         }
@@ -74,12 +106,74 @@ namespace AuspTime
             locator.locationObtained += (sender, e) =>
             {
                 userLatitude = e.lat;
+                userLatitude = Math.Round(userLatitude * 100000.00) / 100000.00;
                 userLongitude = e.lng;
+                userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
             };
             locator.ObtainMyLocation();
             
             userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
-            
+
+            DateLocation defaultSettings = new DateLocation
+            {
+                myDate = DateTime.Now,
+                myLatitude = userLatitude,
+                myLongitude = userLongitude,
+                myOffset = userOffset
+            };
+            Application.Current.Properties["Default"] = defaultSettings;
+        }
+
+        private void ResetLocation()
+        {
+            DateLocation dl = Application.Current.Properties["MyPreferences"] as DateLocation;
+            isLocationChanged = CheckLocation(dl.myLatitude, dl.myLongitude, dl.myOffset);
+            if (isLocationChanged)
+            {
+                useCurrentOrConfigured.Text = "Using configured date and location";
+                userLatitude = dl.myLatitude;
+                userLongitude = dl.myLongitude;
+                userOffset = dl.myOffset;
+            }
+            else if (isToday)
+            {
+                useCurrentOrConfigured.Text = "Using current date and location";
+            }
+        }
+
+        private bool CheckLocation(double lat, double lng, double offset)
+        {
+            bool locationChanged = true;
+            double[] currentLocation = GetCurrentLocation();
+            double diffLatitude = Math.Abs(currentLocation[0] - lat);
+            double diffLongitude = Math.Abs(currentLocation[1] - lng);
+            double diffOffset = Math.Abs(currentLocation[2] - offset);
+            if (diffLatitude <= 0.01 && diffLongitude <= 0.01 && diffOffset <= 0.01)
+            {
+                locationChanged = false;
+            }
+            return locationChanged;
+        }
+
+        private double[] GetCurrentLocation()
+        {
+            double[] data = new double[3];
+            IGeolocator locator = DependencyService.Get<IGeolocator>();
+            double currentLatitude = 0, currentLongitude = 0;
+            locator.locationObtained += (sender, e) =>
+            {
+                currentLatitude = e.lat;
+                currentLatitude = Math.Round(currentLatitude * 100000.00) / 100000.00;
+                currentLongitude = e.lng;
+                currentLongitude = Math.Round(currentLongitude * 100000.00) / 100000.00;
+            };
+            locator.ObtainMyLocation();
+            data[0] = currentLatitude;
+            data[1] = currentLongitude;
+            data[2] = new DateTimeOffset(DateTime.Now).Offset.Hours;
+            Debug.WriteLine("currentLatitude: " + currentLatitude + ", currentLongitude: " + currentLongitude);
+
+            return data;
         }
 
         private void InitPanel()
@@ -137,18 +231,15 @@ namespace AuspTime
 
         private void CalculateTimeSequence()
         {
-            SunTime sunTime = new SunTime(userLatitude, userLongitude, userOffset, DateTime.Now);
+            SunTime sunTime = new SunTime(userLatitude, userLongitude, userOffset, userDate);
             int sunriseTimeTodayDefault = sunTime.sunriseTime, sunsetTimeTodayDefault = sunTime.sunsetTime;
             int flagrise = sunTime.flagrise, flagset = sunTime.flagset;
 
-            
-            Debug.WriteLine("DateTime.Now = " + DateTime.Now);
-
-            DateTime yesterday = DateTime.Now.AddDays(-1);
+            DateTime yesterday = userDate.AddDays(-1);
             sunTime = new SunTime(userLatitude, userLongitude, userOffset, yesterday);
             int sunriseTimeYesterdayDefault = sunTime.sunriseTime, sunsetTimeYesterdayDefault = sunTime.sunsetTime;
 
-            DateTime tomorrow = DateTime.Now.AddDays(1);
+            DateTime tomorrow = userDate.AddDays(1);
             sunTime = new SunTime(userLatitude, userLongitude, userOffset, tomorrow);
             int sunriseTimeTomorrowDefault = sunTime.sunriseTime, sunsetTimeTomorrowDefault = sunTime.sunsetTime;
 
@@ -169,7 +260,7 @@ namespace AuspTime
 
         private void SetSequence()
         {
-            int day = (int) DateTime.Now.DayOfWeek;
+            int day = (int) userDate.DayOfWeek;
             switch (day)
             {
                 case 0:
@@ -405,7 +496,10 @@ namespace AuspTime
                 dateTimeTitle.BackgroundColor = group[8].BackgroundColor;
                 index = 8;
             }
-            group[index].Text = ("\u261E " + group[index].Text);
+            if (isToday)
+            {
+                group[index].Text = ("\u261E " + group[index].Text);
+            }
         }
 
         async void OnConfigure(object sender, EventArgs e)

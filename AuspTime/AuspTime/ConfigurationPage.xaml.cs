@@ -25,6 +25,21 @@ namespace AuspTime
             CheckLocation();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (Application.Current.Properties.ContainsKey("MyPreferences"))
+            {
+                DateLocation preferences = Application.Current.Properties["MyPreferences"] as DateLocation;
+                latitudeEntry.Text = preferences.myLatitude.ToString();
+                longitudeEntry.Text = preferences.myLongitude.ToString();
+                offsetEntry.Text = preferences.myOffset.ToString();
+                datePicker.Date = preferences.myDate;
+                CheckDate();
+                CheckLocation();
+            }
+        }
+
         async void OnPreviousPageButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
@@ -48,14 +63,27 @@ namespace AuspTime
 
         private void OnDoneClicked(object sender, EventArgs e)
         {
+            DateTime dateTime =
+                new DateTime(datePicker.Date.Year, datePicker.Date.Month, datePicker.Date.Day, 
+                             DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+            DateLocation dl = new DateLocation
+            {
+                myDate = dateTime,
+                myLatitude = Double.Parse(latitudeEntry.Text),
+                myLongitude = Double.Parse(longitudeEntry.Text),
+                myOffset = Double.Parse(offsetEntry.Text)
+            };
+            Application.Current.Properties["MyPreferences"] = dl;
             OnPreviousPageButtonClicked(sender, e);
         }
 
         private void OnCurrentLocationClicked(object sender, EventArgs e)
         {
-            latitudeEntry.Text = MainPage.userLatitude.ToString();
-            longitudeEntry.Text = MainPage.userLongitude.ToString();
-            offsetEntry.Text = MainPage.userOffset.ToString();
+            double[] locationData = GetCurrentLocation();
+            latitudeEntry.Text = locationData[0].ToString();
+            longitudeEntry.Text = locationData[1].ToString();
+            double userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
+            offsetEntry.Text = userOffset.ToString();
             currentLocationButton.BackgroundColor = Color.Aquamarine;
         }
 
@@ -75,13 +103,34 @@ namespace AuspTime
 
         private void CheckLocation()
         {
-            double diffLatitude = Math.Abs(MainPage.userLatitude - Double.Parse(latitudeEntry.Text));
-            double diffLongitude = Math.Abs(MainPage.userLongitude - Double.Parse(longitudeEntry.Text));
-            double diffOffset = Math.Abs(MainPage.userOffset - Double.Parse(offsetEntry.Text));
-            if (diffLatitude > 0.01 || diffLongitude > 0.01 || diffOffset > 0.01)
+            double[] locationData = GetCurrentLocation();
+
+            double diffLatitude = Math.Abs(locationData[0] - Double.Parse(latitudeEntry.Text));
+            double diffLongitude = Math.Abs(locationData[1] - Double.Parse(longitudeEntry.Text));
+            if (diffLatitude > 0.01 || diffLongitude > 0.01)
             {
                 currentLocationButton.BackgroundColor = Color.Red;
             }
+        }
+
+        private double[] GetCurrentLocation()
+        {
+            double[] data = new double[2];
+            IGeolocator locator = DependencyService.Get<IGeolocator>();
+            double currentLatitude = 0, currentLongitude = 0;
+            locator.locationObtained += (sender, e) =>
+            {
+                currentLatitude = e.lat;
+                currentLatitude = Math.Round(currentLatitude * 100000.00) / 100000.00;
+                currentLongitude = e.lng;
+                currentLongitude = Math.Round(currentLongitude * 100000.00) / 100000.00;
+            };
+            locator.ObtainMyLocation();
+            data[0] = currentLatitude;
+            data[1] = currentLongitude;
+            Debug.WriteLine("currentLatitude: " + currentLatitude + ", currentLongitude: " + currentLongitude);
+
+            return data;
         }
     }
 }

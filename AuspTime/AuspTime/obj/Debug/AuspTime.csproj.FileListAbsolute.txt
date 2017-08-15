@@ -31,3 +31,31 @@ C:\Users\ccr13\OneDrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\
 C:\Users\ccr13\OneDrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime\bin\Debug\Mono.Security.pdb
 C:\Users\ccr13\OneDrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.dll
 C:\Users\ccr13\OneDrive\documents\visual studio 2017\Projects\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\AuspTime.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\AuspTime.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Mono.Android.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Core.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Platform.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Xaml.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.iOS.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\System.Core.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\System.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\System.Xml.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Mono.Security.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Mono.Android.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Mono.Android.xml
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Core.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Core.xml
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Platform.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Xaml.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.Forms.Xaml.xml
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Xamarin.iOS.xml
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\System.Core.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\System.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\System.Xml.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\bin\Debug\Mono.Security.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.MainPage.xaml.g.cs
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.App.xaml.g.cs
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.ConfigurationPage.xaml.g.cs
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.dll
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.pdb

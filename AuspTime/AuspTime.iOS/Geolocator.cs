@@ -59,6 +59,7 @@ namespace AuspTime.iOS
                 }
             };
             lm.RequestWhenInUseAuthorization();
+            lm.StartUpdatingLocation();
         }
 
         ~Geolocator()
