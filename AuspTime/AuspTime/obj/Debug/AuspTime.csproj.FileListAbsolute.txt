@@ -59,3 +59,4 @@ C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.App.xaml.
 C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.ConfigurationPage.xaml.g.cs
 C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.dll
 C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.pdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime\obj\Debug\AuspTime.csprojResolveAssemblyReference.cache

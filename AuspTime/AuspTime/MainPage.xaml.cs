@@ -7,8 +7,73 @@ namespace AuspTime
 {
     public partial class MainPage : ContentPage
     {
-        public static double userLatitude = 44.83661;
-        public static double userLongitude = -93.30022;
+        public static double userLatitude = 30;
+        public static double userLongitude = -94;
+
+        public double UserLatitude
+        {
+            get
+            {
+                return userLatitude;
+            }
+
+            set
+            {
+                if (Math.Abs(userLatitude - value) > 0.01)
+                {
+                    SendPropertyChanging("UserLatitude");
+                    userLatitude = value;
+                    userLatitude = Math.Round(userLatitude * 100000.00) / 100000.00;
+                    Init();
+                    
+                    if (Application.Current.Properties.ContainsKey("Default"))
+                    {
+                        DateLocation defaultLoc = Application.Current.Properties["Default"] as DateLocation;
+                        defaultLoc.myLatitude = value;
+                        Application.Current.Properties["Default"] = defaultLoc;
+                    }
+                }
+            }
+        }
+
+        private void SendPropertyChanging(string property)
+        {
+            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(property));
+        }
+
+        public event PropertyChangingEventHandler PropertyChanging;
+
+        public static void UserLocationPropertyChanging(object sender, PropertyChangingEventArgs e)
+        {
+            Debug.WriteLine(e.PropertyName + " has been changing");
+        }
+
+        public double UserLongitude
+        {
+            get
+            {
+                return userLongitude;
+            }
+
+            set
+            {
+                if (Math.Abs(userLongitude - value) > 0.01)
+                {
+                    SendPropertyChanging("UserLongitude");
+                    userLongitude = value;
+                    userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
+                    Init();
+
+                    if (Application.Current.Properties.ContainsKey("Default"))
+                    {
+                        DateLocation defaultLoc = Application.Current.Properties["Default"] as DateLocation;
+                        defaultLoc.myLatitude = value;
+                        Application.Current.Properties["Default"] = defaultLoc;
+                    }
+                }
+            }
+        }
+
         public static double userOffset = -5.00;
         public DateTime userDate = DateTime.Now;
 
@@ -29,6 +94,9 @@ namespace AuspTime
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
+
+            this.PropertyChanging += new PropertyChangingEventHandler(UserLocationPropertyChanging);
+
             Init();
 
             aboutButton.Clicked += delegate
@@ -59,6 +127,7 @@ namespace AuspTime
 
         private void Init()
         {
+            
             SetPadding();
             SetLocation();
             InitPanel();
@@ -105,13 +174,17 @@ namespace AuspTime
             IGeolocator locator = DependencyService.Get<IGeolocator>();
             locator.locationObtained += (sender, e) =>
             {
-                userLatitude = e.lat;
-                userLatitude = Math.Round(userLatitude * 100000.00) / 100000.00;
-                userLongitude = e.lng;
-                userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
+                UserLatitude = e.lat;
+                UserLatitude = Math.Round(UserLatitude * 100000.00) / 100000.00;
+                userLatitude = UserLatitude;
+                UserLongitude = e.lng;
+                UserLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
+                userLongitude = UserLongitude;
             };
             locator.ObtainMyLocation();
-            
+
+            Debug.WriteLine("userLatitude: " + userLatitude + ", userLongitude: " + userLongitude);
+
             userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
 
             DateLocation defaultSettings = new DateLocation
@@ -144,36 +217,14 @@ namespace AuspTime
         private bool CheckLocation(double lat, double lng, double offset)
         {
             bool locationChanged = true;
-            double[] currentLocation = GetCurrentLocation();
-            double diffLatitude = Math.Abs(currentLocation[0] - lat);
-            double diffLongitude = Math.Abs(currentLocation[1] - lng);
-            double diffOffset = Math.Abs(currentLocation[2] - offset);
+            double diffLatitude = Math.Abs(userLatitude - lat);
+            double diffLongitude = Math.Abs(userLongitude - lng);
+            double diffOffset = Math.Abs(userOffset - offset);
             if (diffLatitude <= 0.01 && diffLongitude <= 0.01 && diffOffset <= 0.01)
             {
                 locationChanged = false;
             }
             return locationChanged;
-        }
-
-        private double[] GetCurrentLocation()
-        {
-            double[] data = new double[3];
-            IGeolocator locator = DependencyService.Get<IGeolocator>();
-            double currentLatitude = 0, currentLongitude = 0;
-            locator.locationObtained += (sender, e) =>
-            {
-                currentLatitude = e.lat;
-                currentLatitude = Math.Round(currentLatitude * 100000.00) / 100000.00;
-                currentLongitude = e.lng;
-                currentLongitude = Math.Round(currentLongitude * 100000.00) / 100000.00;
-            };
-            locator.ObtainMyLocation();
-            data[0] = currentLatitude;
-            data[1] = currentLongitude;
-            data[2] = new DateTimeOffset(DateTime.Now).Offset.Hours;
-            Debug.WriteLine("currentLatitude: " + currentLatitude + ", currentLongitude: " + currentLongitude);
-
-            return data;
         }
 
         private void InitPanel()
@@ -247,7 +298,6 @@ namespace AuspTime
             int temp2 = (sunsetTimeTodayDefault - sunriseTimeTodayDefault) / 8; // today
             int temp3 = (86400 - sunsetTimeTodayDefault + sunriseTimeTomorrowDefault) / 8; // tonight
             int temp4 = (sunsetTimeTomorrowDefault - sunriseTimeTomorrowDefault) / 8; // tomorrow
-            Debug.WriteLine("temp1 = " + temp1);
             
             for (int i = 0; i < 8; i++)
             {

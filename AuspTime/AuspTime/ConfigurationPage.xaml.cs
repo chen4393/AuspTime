@@ -79,9 +79,8 @@ namespace AuspTime
 
         private void OnCurrentLocationClicked(object sender, EventArgs e)
         {
-            double[] locationData = GetCurrentLocation();
-            latitudeEntry.Text = locationData[0].ToString();
-            longitudeEntry.Text = locationData[1].ToString();
+            latitudeEntry.Text = MainPage.userLatitude.ToString();
+            longitudeEntry.Text = MainPage.userLongitude.ToString();
             double userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
             offsetEntry.Text = userOffset.ToString();
             currentLocationButton.BackgroundColor = Color.Aquamarine;
@@ -103,32 +102,50 @@ namespace AuspTime
 
         private void CheckLocation()
         {
-            double[] locationData = GetCurrentLocation();
-
-            double diffLatitude = Math.Abs(locationData[0] - Double.Parse(latitudeEntry.Text));
-            double diffLongitude = Math.Abs(locationData[1] - Double.Parse(longitudeEntry.Text));
+            double[] currLocation = GetCurrentLocation();
+            double diffLatitude = Math.Abs(currLocation[0] - Double.Parse(latitudeEntry.Text));
+            double diffLongitude = Math.Abs(currLocation[1] - Double.Parse(longitudeEntry.Text));
             if (diffLatitude > 0.01 || diffLongitude > 0.01)
             {
                 currentLocationButton.BackgroundColor = Color.Red;
+            }
+            else
+            {
+                currentLocationButton.BackgroundColor = Color.Aquamarine;
             }
         }
 
         private double[] GetCurrentLocation()
         {
             double[] data = new double[2];
-            IGeolocator locator = DependencyService.Get<IGeolocator>();
-            double currentLatitude = 0, currentLongitude = 0;
-            locator.locationObtained += (sender, e) =>
+            int platform = 0;
+            switch (Device.RuntimePlatform)
             {
-                currentLatitude = e.lat;
-                currentLatitude = Math.Round(currentLatitude * 100000.00) / 100000.00;
-                currentLongitude = e.lng;
-                currentLongitude = Math.Round(currentLongitude * 100000.00) / 100000.00;
-            };
-            locator.ObtainMyLocation();
-            data[0] = currentLatitude;
-            data[1] = currentLongitude;
-            Debug.WriteLine("currentLatitude: " + currentLatitude + ", currentLongitude: " + currentLongitude);
+                case Device.iOS:
+                    platform = 1;
+                    break;
+            }
+
+            if (platform == 0) // Android
+            {
+                IGeolocator locator = DependencyService.Get<IGeolocator>();
+                double currentLatitude = 0, currentLongitude = 0;
+                locator.locationObtained += (sender, e) =>
+                {
+                    currentLatitude = e.lat;
+                    currentLatitude = Math.Round(currentLatitude * 100000.00) / 100000.00;
+                    currentLongitude = e.lng;
+                    currentLongitude = Math.Round(currentLongitude * 100000.00) / 100000.00;
+                };
+                locator.ObtainMyLocation();
+                data[0] = currentLatitude;
+                data[1] = currentLongitude;
+            }
+            else // iOS
+            {
+                data[0] = MainPage.userLatitude;
+                data[1] = MainPage.userLongitude;
+            }
 
             return data;
         }

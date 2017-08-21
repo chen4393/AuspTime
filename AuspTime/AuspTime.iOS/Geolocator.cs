@@ -37,7 +37,7 @@ namespace AuspTime.iOS
         public void ObtainMyLocation()
         {
             lm = new CLLocationManager();
-            lm.DesiredAccuracy = CLLocation.AccuracyBest;
+            lm.DesiredAccuracy = 100;
             lm.DistanceFilter = CLLocationDistance.FilterNone;
 
             lm.LocationsUpdated += (sender, e) =>
@@ -48,17 +48,15 @@ namespace AuspTime.iOS
                 LocationEventArgs args = new LocationEventArgs();
                 args.lat = locations[locations.Length - 1].Coordinate.Latitude;
                 args.lng = locations[locations.Length - 1].Coordinate.Longitude;
+                Debug.WriteLine(args.lat + ", " + args.lng);
                 locationObtained(this, args);
             };
             lm.AuthorizationChanged += (sender, e) =>
             {
-                //Debug.WriteLine("e.Status = " + e.Status + ", AuthorizedWhenInUse = " + CLAuthorizationStatus.AuthorizedWhenInUse);
-                if (e.Status == CLAuthorizationStatus.AuthorizedWhenInUse)
-                {
-                    lm.StartUpdatingLocation();
-                }
+                lm.StartUpdatingLocation();
             };
             lm.RequestWhenInUseAuthorization();
+            lm.RequestAlwaysAuthorization();
             lm.StartUpdatingLocation();
         }
 

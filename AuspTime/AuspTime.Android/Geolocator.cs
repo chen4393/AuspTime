@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using AuspTime.Droid;
 using Java.Lang;
 using Android.Locations;
+using Android.Util;
 
 [assembly: Dependency(typeof(Geolocator))]
 namespace AuspTime.Droid
@@ -71,6 +72,7 @@ namespace AuspTime.Droid
                 args.lat = location.Latitude;
                 args.lng = location.Longitude;
                 locationObtained(this, args);
+                Log.Info("CC", args.lat + ", " + args.lng);
             }
         }
 

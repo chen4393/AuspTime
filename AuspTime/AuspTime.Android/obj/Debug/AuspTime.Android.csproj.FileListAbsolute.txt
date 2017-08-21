@@ -135,3 +135,11 @@ C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\res\layout
 C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\res\values\styles.xml
 C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\R.cs.flag
 C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\uploadflags.txt
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\bin\Debug\AuspTime.Android.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\bin\Debug\AuspTime.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\android\assets\AuspTime.Android.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\android\assets\AuspTime.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\android\assets\FormsViewGroup.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\android\assets\Xamarin.Forms.Core.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\android\assets\Xamarin.Forms.Platform.Android.dll.mdb
+C:\Users\ccr13\Documents\AuspTime\AuspTime\AuspTime.Android\obj\Debug\android\assets\Xamarin.Forms.Xaml.dll.mdb

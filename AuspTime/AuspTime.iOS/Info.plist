@@ -56,6 +56,8 @@
     <string>Need location access for updating nearby friends</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>This app will use your location to show you cool stuff near you.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Requests permission to use location services whenever the app is running.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>NeedLibrary access for uploading Images</string>
   </dict>
