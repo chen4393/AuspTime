@@ -48,13 +48,13 @@ namespace AuspTime.Droid
             lm = (LocationManager)Forms.Context.GetSystemService(Context.LocationService);
             lm.RequestLocationUpdates(LocationManager.GpsProvider, 0, 0, this);
             Location location;
-            if (lm.IsProviderEnabled(LocationManager.GpsProvider))
+            if (lm.IsProviderEnabled(LocationManager.NetworkProvider))
             {
-                location = lm.GetLastKnownLocation(LocationManager.GpsProvider);
+                location = lm.GetLastKnownLocation(LocationManager.NetworkProvider);
             }
             else
             {
-                location = lm.GetLastKnownLocation(LocationManager.NetworkProvider);
+                location = lm.GetLastKnownLocation(LocationManager.GpsProvider);
             }
             OnLocationChanged(location);
         }

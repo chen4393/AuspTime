@@ -142,13 +142,13 @@ namespace AuspTime
             if (dl.myDate.DayOfYear != DateTime.Now.DayOfYear)
             {
                 isToday = false;
-                userDate = dl.myDate;
                 useCurrentOrConfigured.Text = "Using configured date and location";
             }
             else
             {
                 isToday = true;
             }
+            userDate = dl.myDate;
             ResetLocation();
             CalculateTimeSequence();
             SetSequence();

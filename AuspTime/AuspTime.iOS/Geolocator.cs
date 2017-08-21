@@ -56,7 +56,6 @@ namespace AuspTime.iOS
                 lm.StartUpdatingLocation();
             };
             lm.RequestWhenInUseAuthorization();
-            lm.RequestAlwaysAuthorization();
             lm.StartUpdatingLocation();
         }
 
