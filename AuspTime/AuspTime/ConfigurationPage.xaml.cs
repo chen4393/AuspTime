@@ -79,8 +79,16 @@ namespace AuspTime
 
         private void OnCurrentLocationClicked(object sender, EventArgs e)
         {
-            latitudeEntry.Text = MainPage.userLatitude.ToString();
-            longitudeEntry.Text = MainPage.userLongitude.ToString();
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                latitudeEntry.Text = MainPage.userLatitude.ToString();
+                longitudeEntry.Text = MainPage.userLongitude.ToString();
+            }
+            else
+            {
+                latitudeEntry.Text = MainPage.currrentLatitude.ToString();
+                longitudeEntry.Text = MainPage.currentLongitude.ToString();
+            }
             double userOffset = new DateTimeOffset(DateTime.Now).Offset.Hours;
             offsetEntry.Text = userOffset.ToString();
             currentLocationButton.BackgroundColor = Color.Aquamarine;
@@ -143,8 +151,8 @@ namespace AuspTime
             }
             else // iOS
             {
-                data[0] = MainPage.userLatitude;
-                data[1] = MainPage.userLongitude;
+                data[0] = MainPage.currrentLatitude;
+                data[1] = MainPage.currentLongitude;
             }
 
             return data;

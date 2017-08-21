@@ -9,6 +9,8 @@ namespace AuspTime
     {
         public static double userLatitude = 30;
         public static double userLongitude = -94;
+        public static double currrentLatitude;
+        public static double currentLongitude;
 
         public double UserLatitude
         {
@@ -24,8 +26,24 @@ namespace AuspTime
                     SendPropertyChanging("UserLatitude");
                     userLatitude = value;
                     userLatitude = Math.Round(userLatitude * 100000.00) / 100000.00;
-                    Init();
+                    currrentLatitude = userLatitude;
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        Init();
+                    }
+                    else
+                    {
+                        if (isConfigured)
+                        {
+                            ReInit();
+                        }
+                        else
+                        {
+                            Init();
+                        }
+                    }
                     
+
                     if (Application.Current.Properties.ContainsKey("Default"))
                     {
                         DateLocation defaultLoc = Application.Current.Properties["Default"] as DateLocation;
@@ -62,7 +80,22 @@ namespace AuspTime
                     SendPropertyChanging("UserLongitude");
                     userLongitude = value;
                     userLongitude = Math.Round(userLongitude * 100000.00) / 100000.00;
-                    Init();
+                    currentLongitude = userLongitude;
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        Init();
+                    }
+                    else
+                    {
+                        if (isConfigured)
+                        {
+                            ReInit();
+                        }
+                        else
+                        {
+                            Init();
+                        }
+                    }
 
                     if (Application.Current.Properties.ContainsKey("Default"))
                     {
@@ -89,6 +122,7 @@ namespace AuspTime
 
         private bool isToday = true;
         private bool isLocationChanged = false;
+        private bool isConfigured = false;
 
         public MainPage()
         {
@@ -119,10 +153,8 @@ namespace AuspTime
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (Application.Current.Properties.ContainsKey("MyPreferences"))
-            {
-                ReInit();
-            }
+            isConfigured = true;
+            ReInit();
         }
 
         private void Init()
@@ -137,6 +169,10 @@ namespace AuspTime
 
         private void ReInit()
         {
+            if (!Application.Current.Properties.ContainsKey("MyPreferences"))
+            {
+                return;
+            }
             DateLocation dl = Application.Current.Properties["MyPreferences"] as DateLocation;
             dateTimeTitle.Text = dl.myDate.ToString("yyyy-MMM-dd h:mm tt");
             if (dl.myDate.DayOfYear != DateTime.Now.DayOfYear)
@@ -217,8 +253,8 @@ namespace AuspTime
         private bool CheckLocation(double lat, double lng, double offset)
         {
             bool locationChanged = true;
-            double diffLatitude = Math.Abs(userLatitude - lat);
-            double diffLongitude = Math.Abs(userLongitude - lng);
+            double diffLatitude = Math.Abs(currrentLatitude - lat);
+            double diffLongitude = Math.Abs(currentLongitude - lng);
             double diffOffset = Math.Abs(userOffset - offset);
             if (diffLatitude <= 0.01 && diffLongitude <= 0.01 && diffOffset <= 0.01)
             {
